@@ -23,7 +23,7 @@ const interviewerCard = ({ interviewer }: Props) => {
           <div className="w-full h-28 overflow-hidden">
             <Image
               src={interviewer.image}
-              alt="Picture of the interviewer"
+              alt="面试官图片"
               width={200}
               height={40}
               className="w-full h-full object-cover object-center"
