@@ -79,7 +79,7 @@ function InterviewCard({ name, interviewerId, id, url, readableSlug }: Props) {
       .then(
         () => {
           setCopied(true);
-          toast.success("The link to your interview has been copied to your clipboard.", {
+          toast.success("你的面试链接已复制到剪贴板。", {
             position: "bottom-right",
             duration: 3000,
           });
@@ -124,14 +124,14 @@ function InterviewCard({ name, interviewerId, id, url, readableSlug }: Props) {
             <div className="w-full overflow-hidden">
               <Image
                 src={img}
-                alt="Picture of the interviewer"
+                alt="面试官图片"
                 width={70}
                 height={70}
                 className="object-cover object-center"
               />
             </div>
             <div className="text-black text-sm font-semibold mt-2 mr-2 whitespace-nowrap">
-              Responses: <span className="font-normal">{responseCount?.toString() || 0}</span>
+              回答数：<span className="font-normal">{responseCount?.toString() || 0}</span>
             </div>
           </div>
           <div className="absolute top-2 right-2 flex gap-1">
