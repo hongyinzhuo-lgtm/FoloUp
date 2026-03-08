@@ -109,9 +109,7 @@ function QuestionsPopup({ interviewData, setProceed, setOpen }: Props) {
           />
           <h1 className="text-2xl font-semibold">创建面试</h1>
         </div>
-        <div className="my-3 text-left w-[96%] text-sm">
-          面试过程中将使用以下问题，请确认这些问题是否合适。
-        </div>
+        <div className="my-3 text-left w-[96%] text-sm">面试过程中将使用以下问题，请确认这些问题是否合适</div>
         <ScrollArea className="flex flex-col justify-center items-center w-full mt-3">
           {questions.map((question, index) => (
             <QuestionCard
@@ -136,9 +134,7 @@ function QuestionsPopup({ interviewData, setProceed, setOpen }: Props) {
           <></>
         )}
       </div>
-      <p className="mt-3 mb-1 ml-2 font-medium">
-        面试说明{" "}
-        <span
+      <p className="mt-3 mb-1 ml-2 font-medium">面试说明{" "}<span
           style={{ fontSize: "0.7rem", lineHeight: "0.66rem" }}
           className="font-light text-xs italic w-full text-left block"
         >
