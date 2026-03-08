@@ -21,8 +21,8 @@ function SideMenu() {
             }`}
             onClick={() => router.push("/dashboard")}
           >
-            <PlayCircleIcon className="font-thin	 mr-2" />
-            <p className="font-medium ">Interviews</p>
+            <PlayCircleIcon className="font-thin mr-2" />
+            <p className="font-medium ">安排面试</p>
           </button>
           <button
             type="button"
@@ -32,7 +32,7 @@ function SideMenu() {
             onClick={() => router.push("/dashboard/interviewers")}
           >
             <SpeechIcon className="font-thin mr-2" />
-            <p className="font-medium ">Interviewers</p>
+            <p className="font-medium ">面试官</p>
           </button>
         </div>
       </div>
