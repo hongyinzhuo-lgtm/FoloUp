@@ -34,7 +34,7 @@ function CreateInterviewerButton() {
             </div>
           )}
           <p className="my-3 mx-auto text-xs text-wrap w-fit text-center">
-            Create two Default Interviewers
+            创建两个默认面试官
           </p>
         </CardContent>
       </Card>
