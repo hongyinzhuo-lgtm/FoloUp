@@ -135,7 +135,7 @@ function DetailsPopup({
         <h1 className="text-xl font-semibold">创建面试</h1>
         <div className="flex flex-col justify-center items-start mt-4 ml-10 mr-8">
           <div className="flex flex-row justify-center items-center">
-            <h3 className="text-sm font-medium">面试名称：</h3>
+            <h3 className="text-sm font-medium">面试名称(拼音/英语)：</h3>
             <input
               type="text"
               className="border-b-2 focus:outline-none border-gray-500 px-2 w-96 py-0.5 ml-3"
