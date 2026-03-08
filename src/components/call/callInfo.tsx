@@ -167,9 +167,7 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
                     <p className="text-sm font-semibold">返回汇总</p>
                   </button>
                   {tabSwitchCount && tabSwitchCount > 0 && (
-                    <p className="text-sm font-semibold text-red-500 bg-red-200 rounded-sm px-2 py-1">
-                      检测到切换标签页
-                    </p>
+                    <p className="text-sm font-semibold text-red-500 bg-red-200 rounded-sm px-2 py-1">检测到切换标签页</p>
                   )}
                 </div>
               </div>
@@ -202,27 +200,19 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
                       <SelectContent>
                         <SelectItem value={CandidateStatus.NO_STATUS}>
                           <div className="flex items-center">
-                            <div className="w-3 h-3 bg-gray-400 rounded-full mr-2" />
-                            无状态
-                          </div>
+                            <div className="w-3 h-3 bg-gray-400 rounded-full mr-2" />无状态</div>
                         </SelectItem>
                         <SelectItem value={CandidateStatus.NOT_SELECTED}>
                           <div className="flex items-center">
-                            <div className="w-3 h-3 bg-red-500 rounded-full mr-2" />
-                            未选中
-                          </div>
+                            <div className="w-3 h-3 bg-red-500 rounded-full mr-2" />未选中</div>
                         </SelectItem>
                         <SelectItem value={CandidateStatus.POTENTIAL}>
                           <div className="flex items-center">
-                            <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2" />
-                            潜在
-                          </div>
+                            <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2" />潜在</div>
                         </SelectItem>
                         <SelectItem value={CandidateStatus.SELECTED}>
                           <div className="flex items-center">
-                            <div className="w-3 h-3 bg-green-500 rounded-full mr-2" />
-                            已选
-                          </div>
+                            <div className="w-3 h-3 bg-green-500 rounded-full mr-2" />已选</div>
                         </SelectItem>
                       </SelectContent>
                     </Select>
@@ -236,9 +226,7 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
                       <AlertDialogContent>
                         <AlertDialogHeader>
                           <AlertDialogTitle>确定要删除吗？</AlertDialogTitle>
-                          <AlertDialogDescription>
-                            此操作无法撤销，将永久删除此条回答。
-                          </AlertDialogDescription>
+                          <AlertDialogDescription>此操作无法撤销，将永久删除此条回答。</AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
                           <AlertDialogCancel>取消</AlertDialogCancel>
@@ -247,9 +235,7 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
                             onClick={async () => {
                               await onDeleteResponseClick();
                             }}
-                          >
-                            确认删除
-                          </AlertDialogAction>
+                          >确认删除</AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>
                     </AlertDialog>
