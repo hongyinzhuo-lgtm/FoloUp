@@ -80,9 +80,7 @@ const createInterviewerCard = () => {
         }}
       >
         <div className="text-center w-[35rem]">
-          <CardTitle className="text-2xl text mt-0 mb-4 p-0 font-semibold ">
-            自定义创建面试官
-          </CardTitle>
+          <CardTitle className="text-2xl text mt-0 mb-4 p-0 font-semibold ">自定义创建面试官</CardTitle>
           <div className="mt-3 p-2 flex flex-row justify-center space-x-10 items-center">
             <button
               type="button"
@@ -100,9 +98,7 @@ const createInterviewerCard = () => {
               ) : (
                 <div>
                   <LucideImage className="mt-3 text-gray-300" size={100} strokeWidth={0.7} />
-                  <h4 className="text-xs text-center font-medium text-gray-400">
-                    选择头像
-                  </h4>
+                  <h4 className="text-xs text-center font-medium text-gray-400">选择头像</h4>
                 </div>
               )}
             </button>
