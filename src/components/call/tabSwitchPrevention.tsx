@@ -43,9 +43,7 @@ function TabSwitchWarning() {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>警告：检测到切换标签页</AlertDialogTitle>
-          <AlertDialogDescription>
-            切换标签页可能会影响您的面试表现。系统会记录切换标签页的行为。
-          </AlertDialogDescription>
+          <AlertDialogDescription>切换标签页可能会影响您的面试表现。系统会记录切换标签页的行为。</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogAction
