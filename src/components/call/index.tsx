@@ -317,10 +317,8 @@ function Call({ interview }: InterviewProps) {
                   <div className="p-2 font-normal text-sm mb-4 whitespace-pre-line">
                     {interview?.description}
                     <p className="font-bold text-sm">
-                      {"\n"}请确保音量已打开，并在提示时允许麦克风权限。
-                      另外，请尽量处于安静环境中。
-                      {"\n\n"}注意：系统会记录切换标签页的行为。
-                    </p>
+                      {"\n"}请确保音量已打开，并在提示时允许麦克风权限。另外，请尽量处于安静环境中。
+                      {"\n\n"}注意：系统会记录切换标签页的行为。</p>
                   </div>
                   {!interview?.is_anonymous && (
                     <div className="flex flex-col gap-2 justify-center">
@@ -450,9 +448,7 @@ function Call({ interview }: InterviewProps) {
                   <AlertDialogContent>
                     <AlertDialogHeader>
                       <AlertDialogTitle>确定要结束吗？</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        此操作无法撤销，执行后将结束本次通话。
-                      </AlertDialogDescription>
+                      <AlertDialogDescription>此操作无法撤销，执行后将结束本次通话。</AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>取消</AlertDialogCancel>
@@ -480,10 +476,7 @@ function Call({ interview }: InterviewProps) {
                         ? "感谢您抽出时间参加本次面试"
                         : "非常感谢您的考虑。"}
                     </p>
-                    <p className="text-center">
-                      {"\n"}
-                      现在您可以关闭此页面。
-                    </p>
+                    <p className="text-center">{"\n"}现在您可以关闭此页面</p>
                   </div>
 
                   {!isFeedbackSubmitted && (
@@ -510,13 +503,8 @@ function Call({ interview }: InterviewProps) {
                 <div>
                   <div className="p-2 font-normal text-base mb-4 whitespace-pre-line">
                     <CheckCircleIcon className="h-[2rem] w-[2rem] mx-auto my-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 text-indigo-500" />
-                    <p className="text-lg font-semibold text-center">
-                      您已经参与过这场面试，或当前不符合参与资格。感谢您的关注！
-                    </p>
-                    <p className="text-center">
-                      {"\n"}
-                      现在您可以关闭此页面。
-                    </p>
+                    <p className="text-lg font-semibold text-center">您已经参与过这场面试，或当前不符合参与资格。感谢您的关注！</p>
+                    <p className="text-center">{"\n"}现在您可以关闭此页面。</p>
                   </div>
                 </div>
               </div>
@@ -530,9 +518,7 @@ function Call({ interview }: InterviewProps) {
           target="_blank"
           rel="noreferrer"
         >
-          <div className="text-center text-md font-semibold mr-2">
-            技术支持：
-            <span className="font-bold">
+          <div className="text-center text-md font-semibold mr-2">技术支持：<span className="font-bold">
               Folo<span className="text-indigo-600">Up</span>
             </span>
           </div>
