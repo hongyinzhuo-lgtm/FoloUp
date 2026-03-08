@@ -139,7 +139,7 @@ function DetailsPopup({
             <input
               type="text"
               className="border-b-2 focus:outline-none border-gray-500 px-2 w-96 py-0.5 ml-3"
-              placeholder="例如：面试名称"
+              placeholder="拼音或英文"
               value={name}
               onChange={(e) => setName(e.target.value)}
               onBlur={(e) => setName(e.target.value.trim())}
