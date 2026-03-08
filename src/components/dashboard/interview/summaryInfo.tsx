@@ -163,13 +163,9 @@ function SummaryInfo({ responses, interview }: SummaryProps) {
             <div className="flex flex-row gap-2 items-center">
               <p className="font-semibold my-2">整体分析</p>
             </div>
-            <p className="text-sm">
-              使用的面试官：<span className="font-medium">{interviewer?.name}</span>
-            </p>
+            <p className="text-sm">使用的面试官：<span className="font-medium">{interviewer?.name}</span></p>
           </div>
-          <p className="my-3 ml-2 text-sm">
-            面试说明：<span className="font-medium">{interview?.description}</span>
-          </p>
+          <p className="my-3 ml-2 text-sm">面试说明：<span className="font-medium">{interview?.description}</span></p>
           <div className="flex flex-col gap-1 my-2 mt-4 mx-2 p-4 rounded-2xl bg-slate-50 shadow-md">
             <ScrollArea className="h-[250px]">
               <DataTable data={tableData} interviewId={interview?.id || ""} />
@@ -246,9 +242,7 @@ function SummaryInfo({ responses, interview }: SummaryProps) {
             </div>
             <div className="flex flex-col gap-1 my-2 mt-4 mx-2 p-4 rounded-2xl bg-slate-50 shadow-md">
               <div className="flex flex-row gap-2 text-[15px] font-bold mx-auto mb-1">
-                <UserCircleIcon />
-                候选人状态
-                <InfoTooltip content="候选人筛选状态分布情况" />
+                <UserCircleIcon />候选人状态<InfoTooltip content="候选人筛选状态分布情况" />
               </div>
               <div className="text-sm text-center mb-1">总回答数：{totalResponses}</div>
               <PieChart
