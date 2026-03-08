@@ -15,7 +15,9 @@ interface FeedbackFormProps {
 }
 
 export function FeedbackForm({ onSubmit, email }: FeedbackFormProps) {
-  const [satisfaction, setSatisfaction] = useState<SatisfactionLevel>(SatisfactionLevel.Moderate);
+  const [satisfaction, setSatisfaction] = useState<SatisfactionLevel>(
+    SatisfactionLevel.Moderate
+  );
   const [feedback, setFeedback] = useState("");
 
   const handleSubmit = () => {
@@ -30,13 +32,17 @@ export function FeedbackForm({ onSubmit, email }: FeedbackFormProps) {
 
   return (
     <div className="p-4">
-      <h3 className="text-lg font-semibold mb-4">Are you satisfied with the platform?</h3>
+      <h3 className="text-lg font-semibold mb-4">
+        您对平台满意吗？
+      </h3>
       <div className="flex justify-center space-x-4 mb-4">
         {Object.values(SatisfactionLevel).map((emoji) => (
           <button
             type="button"
             key={emoji}
-            className={`text-3xl ${satisfaction === emoji ? "border-2 border-indigo-600" : ""}`}
+            className={`text-3xl ${
+              satisfaction === emoji ? "border-2 border-indigo-600" : ""
+            }`}
             onClick={() => setSatisfaction(emoji)}
           >
             {emoji}
@@ -45,7 +51,7 @@ export function FeedbackForm({ onSubmit, email }: FeedbackFormProps) {
       </div>
       <Textarea
         value={feedback}
-        placeholder="Add your feedback here"
+        placeholder="请在此填写您的反馈"
         className="mb-4"
         onChange={(e) => setFeedback(e.target.value)}
       />
@@ -54,7 +60,7 @@ export function FeedbackForm({ onSubmit, email }: FeedbackFormProps) {
         className="w-full bg-indigo-600 text-white"
         onClick={handleSubmit}
       >
-        Submit Feedback
+        提交反馈
       </Button>
     </div>
   );
