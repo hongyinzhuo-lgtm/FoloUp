@@ -32,9 +32,7 @@ export function FeedbackForm({ onSubmit, email }: FeedbackFormProps) {
 
   return (
     <div className="p-4">
-      <h3 className="text-lg font-semibold mb-4">
-        您对平台满意吗？
-      </h3>
+      <h3 className="text-lg font-semibold mb-4">您对平台满意吗？</h3>
       <div className="flex justify-center space-x-4 mb-4">
         {Object.values(SatisfactionLevel).map((emoji) => (
           <button
