@@ -12,9 +12,9 @@ export const metadata: Metadata = {
   title: "FoloUp",
   description: "AI powered Interviews",
   openGraph: {
-    title: "FoloUp",
+    title: "ZhuoInAI",
     description: "AI-powered Interviews",
-    siteName: "FoloUp",
+    siteName: "ZhuoInAI",
     images: [
       {
         url: "/foloup.png",
