@@ -42,9 +42,9 @@ function TabSwitchWarning() {
     <AlertDialog open={isDialogOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Warning: Tab Switching</AlertDialogTitle>
+          <AlertDialogTitle>警告：检测到切换标签页</AlertDialogTitle>
           <AlertDialogDescription>
-            Switching tabs may degrade your interview performance. Tab switching is tracked.
+            切换标签页可能会影响您的面试表现。系统会记录切换标签页的行为。
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -52,7 +52,7 @@ function TabSwitchWarning() {
             className="bg-indigo-400 hover:bg-indigo-600 text-white"
             onClick={handleUnderstand}
           >
-            I understand
+            我知道了
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
