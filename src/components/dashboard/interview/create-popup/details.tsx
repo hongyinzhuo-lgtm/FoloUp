@@ -1,3 +1,5 @@
+"use client";
+
 import Modal from "@/components/dashboard/Modal";
 import InterviewerDetailsModal from "@/components/dashboard/interviewer/interviewerDetailsModal";
 import { Button } from "@/components/ui/button";
@@ -130,20 +132,20 @@ function DetailsPopup({
   return (
     <>
       <div className="text-center w-[38rem]">
-        <h1 className="text-xl font-semibold">Create an Interview</h1>
+        <h1 className="text-xl font-semibold">创建面试</h1>
         <div className="flex flex-col justify-center items-start mt-4 ml-10 mr-8">
           <div className="flex flex-row justify-center items-center">
-            <h3 className="text-sm font-medium">Interview Name:</h3>
+            <h3 className="text-sm font-medium">面试名称：</h3>
             <input
               type="text"
               className="border-b-2 focus:outline-none border-gray-500 px-2 w-96 py-0.5 ml-3"
-              placeholder="e.g. Name of the Interview"
+              placeholder="例如：面试名称"
               value={name}
               onChange={(e) => setName(e.target.value)}
               onBlur={(e) => setName(e.target.value.trim())}
             />
           </div>
-          <h3 className="text-sm mt-3 font-medium">Select an Interviewer:</h3>
+          <h3 className="text-sm mt-3 font-medium">选择面试官：</h3>
           <div className="relative flex items-center mt-1">
             <div
               id="slider-3"
@@ -174,7 +176,7 @@ function DetailsPopup({
                   >
                     <Image
                       src={item.image}
-                      alt="Picture of the interviewer"
+                      alt="面试官图片"
                       width={70}
                       height={70}
                       className="w-full h-full object-cover"
@@ -201,16 +203,16 @@ function DetailsPopup({
               <></>
             )}
           </div>
-          <h3 className="text-sm font-medium">Objective:</h3>
+          <h3 className="text-sm font-medium">目标：</h3>
           <Textarea
             value={objective}
             className="h-24 mt-2 border-2 border-gray-500 w-[33.2rem]"
-            placeholder="e.g. Find best candidates based on their technical skills and previous projects."
+            placeholder="例如：根据候选人的技术能力和过往项目经历筛选最合适的人选。"
             onChange={(e) => setObjective(e.target.value)}
             onBlur={(e) => setObjective(e.target.value.trim())}
           />
           <h3 className="text-sm font-medium mt-2">
-            Upload any documents related to the interview.
+            上传与本次面试相关的文档。
           </h3>
           <FileUpload
             isUploaded={isUploaded}
@@ -222,7 +224,7 @@ function DetailsPopup({
           <div className="flex-col mt-7 w-full">
             <div className="flex items-center cursor-pointer">
               <span className="text-sm font-medium">
-                Do you prefer the interviewees&apos; responses to be anonymous?
+                你希望受访者的回答保持匿名吗？
               </span>
               <Switch
                 checked={isAnonymous}
@@ -234,12 +236,12 @@ function DetailsPopup({
               style={{ fontSize: "0.7rem", lineHeight: "0.66rem" }}
               className="font-light text-xs italic w-full text-left block"
             >
-              Note: If not anonymous, the interviewee&apos;s email and name will be collected.
+              说明：如果不匿名，将会收集受访者的邮箱和姓名。
             </span>
           </div>
           <div className="flex flex-row gap-3 justify-between w-full mt-3">
             <div className="flex flex-row justify-center items-center ">
-              <h3 className="text-sm font-medium ">Number of Questions:</h3>
+              <h3 className="text-sm font-medium ">问题数量：</h3>
               <input
                 type="number"
                 step="1"
@@ -259,7 +261,7 @@ function DetailsPopup({
               />
             </div>
             <div className="flex flex-row justify-center items-center">
-              <h3 className="text-sm font-medium ">Duration (mins):</h3>
+              <h3 className="text-sm font-medium ">时长（分钟）：</h3>
               <input
                 type="number"
                 step="1"
@@ -296,7 +298,7 @@ function DetailsPopup({
                 onGenrateQuestions();
               }}
             >
-              Generate Questions
+              生成问题
             </Button>
             <Button
               disabled={
@@ -314,7 +316,7 @@ function DetailsPopup({
                 onManual();
               }}
             >
-              I&apos;ll do it myself
+              我自己填写
             </Button>
           </div>
         </div>
