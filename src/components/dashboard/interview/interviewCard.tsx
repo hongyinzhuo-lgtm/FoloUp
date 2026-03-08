@@ -17,7 +17,7 @@ interface Props {
   readableSlug: string;
 }
 
-// 直接固定你的线上域名，最稳定最简单（更改出标记）
+
 const base_url = "https://zhuoin-interviewer.up.railway.app";
 
 function InterviewCard({ name, interviewerId, id, url, readableSlug }: Props) {
