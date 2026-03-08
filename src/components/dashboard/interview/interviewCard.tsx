@@ -18,7 +18,8 @@ interface Props {
   readableSlug: string;
 }
 
-const base_url = process.env.NEXT_PUBLIC_LIVE_URL;
+// 1️⃣ 这里加上 fallback，保证 base_url 永远有值
+const base_url = process.env.NEXT_PUBLIC_LIVE_URL || (typeof window !== "undefined" ? window.location.origin : "");
 
 function InterviewCard({ name, interviewerId, id, url, readableSlug }: Props) {
   const [copied, setCopied] = useState(false);
@@ -26,17 +27,14 @@ function InterviewCard({ name, interviewerId, id, url, readableSlug }: Props) {
   const [isFetching, setIsFetching] = useState(false);
   const [img, setImg] = useState("");
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     const fetchInterviewer = async () => {
       const interviewer = await InterviewerService.getInterviewer(interviewerId);
       setImg(interviewer.image);
     };
     fetchInterviewer();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [interviewerId]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     const fetchResponses = async () => {
       try {
@@ -50,7 +48,6 @@ function InterviewCard({ name, interviewerId, id, url, readableSlug }: Props) {
                 const result = await axios.post("/api/get-call", {
                   id: response.call_id,
                 });
-
                 if (result.status !== 200) {
                   throw new Error(`HTTP error! status: ${result.status}`);
                 }
@@ -68,37 +65,32 @@ function InterviewCard({ name, interviewerId, id, url, readableSlug }: Props) {
         console.error(error);
       }
     };
-
     fetchResponses();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
 
-  const copyToClipboard = () => {
-    navigator.clipboard
-      .writeText(readableSlug ? `${base_url}/call/${readableSlug}` : (url as string))
-      .then(
-        () => {
-          setCopied(true);
-          toast.success("你的面试链接已复制到剪贴板。", {
-            position: "bottom-right",
-            duration: 3000,
-          });
-          setTimeout(() => {
-            setCopied(false);
-          }, 2000);
-        },
-        (err) => {
-          console.log("failed to copy", err.mesage);
-        },
-      );
-  };
+  // 复制链接
+const copyToClipboard = () => {
+  const link = readableSlug ? `${base_url}/call/${readableSlug}` : `${base_url}/call/${url}`;
+  navigator.clipboard.writeText(link).then(
+    () => {
+      setCopied(true);
+      toast.success("你的面试链接已复制到剪贴板。", {
+        position: "bottom-right",
+        duration: 3000,
+      });
+      setTimeout(() => setCopied(false), 2000);
+    },
+    (err) => console.error("复制失败:", err.message),
+  );
+};
 
-  const handleJumpToInterview = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    event.preventDefault();
-    const interviewUrl = readableSlug ? `/call/${readableSlug}` : `/call/${url}`;
-    window.open(interviewUrl, "_blank");
-  };
+// 打开链接
+const handleJumpToInterview = (event: React.MouseEvent) => {
+  event.stopPropagation();
+  event.preventDefault();
+  const interviewUrl = readableSlug ? `${base_url}/call/${readableSlug}` : `${base_url}/call/${url}`;
+  window.open(interviewUrl, "_blank");
+};
 
   return (
     <a
@@ -143,9 +135,7 @@ function InterviewCard({ name, interviewerId, id, url, readableSlug }: Props) {
               <ArrowUpRight size={16} />
             </Button>
             <Button
-              className={`text-xs text-indigo-600 px-1 h-6  ${
-                copied ? "bg-indigo-300 text-white" : ""
-              }`}
+              className={`text-xs text-indigo-600 px-1 h-6  ${copied ? "bg-indigo-300 text-white" : ""}`}
               variant={"secondary"}
               onClick={(event) => {
                 event.stopPropagation();
