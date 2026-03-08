@@ -41,16 +41,16 @@ function Interviewers() {
       <div className="flex flex-col items-left">
         <div className="flex flex-row mt-5">
           <div>
-            <h2 className="mr-2 text-2xl font-semibold tracking-tight mt-3">Interviewers</h2>
-            <h3 className=" text-sm tracking-tight text-gray-600 font-medium ">
-              Get to know them by clicking the profile.
+            <h2 className="mr-2 text-2xl font-semibold tracking-tight mt-3">面试官</h2>
+            <h3 className="text-sm tracking-tight text-gray-600 font-medium">
+              点击资料卡即可了解他们。
             </h3>
           </div>
         </div>
-        <div className="relative flex items-center mt-2 ">
+        <div className="relative flex items-center mt-2">
           <div
             id="slider"
-            className=" h-44 pt-2 overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide w-[40rem]"
+            className="h-44 pt-2 overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide w-[40rem]"
           >
             {interviewers.length === 0 ? <CreateInterviewerButton /> : <></>}
             {!interviewersLoading ? (
