@@ -75,7 +75,6 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
     };
 
     fetchResponses();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [call_id]);
 
   useEffect(() => {
@@ -96,20 +95,17 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
     };
 
     fetchEmail();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [call_id]);
 
   useEffect(() => {
     const replaceAgentAndUser = (transcript: string, name: string): string => {
-      const agentReplacement = "**AI interviewer:**";
+      const agentReplacement = "**AI 面试官:**";
       const userReplacement = `**${name}:**`;
 
-      // Replace "Agent:" with "AI interviewer:" and "User:" with the variable `${name}:`
       let updatedTranscript = transcript
         .replace(/Agent:/g, agentReplacement)
         .replace(/User:/g, userReplacement);
 
-      // Add space between the dialogues
       updatedTranscript = updatedTranscript.replace(/(?:\r\n|\r|\n)/g, "\n\n");
 
       return updatedTranscript;
@@ -134,17 +130,15 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
         onDeleteResponse(call_id);
       }
 
-      toast.success("Response deleted successfully.", {
+      toast.success("已成功删除回答", {
         position: "bottom-right",
-
         duration: 3000,
       });
     } catch (error) {
-      console.error("Error deleting response:", error);
+      console.error("删除回答时出错:", error);
 
-      toast.error("Failed to delete the response.", {
+      toast.error("删除回答失败", {
         position: "bottom-right",
-
         duration: 3000,
       });
     }
@@ -160,9 +154,6 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
         <>
           <div className="bg-slate-200 rounded-2xl min-h-[120px] p-4 px-5 y-3">
             <div className="flex flex-col justify-between bt-2">
-              {/* <p className="font-semibold my-2 ml-2">
-                Response Analysis and Insights
-              </p> */}
               <div>
                 <div className="flex justify-between items-center pb-4 pr-2">
                   <button
@@ -173,11 +164,11 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
                     }}
                   >
                     <ArrowLeft className="mr-2" />
-                    <p className="text-sm font-semibold">Back to Summary</p>
+                    <p className="text-sm font-semibold">返回汇总</p>
                   </button>
                   {tabSwitchCount && tabSwitchCount > 0 && (
                     <p className="text-sm font-semibold text-red-500 bg-red-200 rounded-sm px-2 py-1">
-                      Tab Switching Detected
+                      检测到切换标签页
                     </p>
                   )}
                 </div>
@@ -206,31 +197,31 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
                       }}
                     >
                       <SelectTrigger className="w-[180px]  bg-slate-50 rounded-2xl">
-                        <SelectValue placeholder="Not Selected" />
+                        <SelectValue placeholder="未选择" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value={CandidateStatus.NO_STATUS}>
                           <div className="flex items-center">
                             <div className="w-3 h-3 bg-gray-400 rounded-full mr-2" />
-                            No Status
+                            无状态
                           </div>
                         </SelectItem>
                         <SelectItem value={CandidateStatus.NOT_SELECTED}>
                           <div className="flex items-center">
                             <div className="w-3 h-3 bg-red-500 rounded-full mr-2" />
-                            Not Selected
+                            未选中
                           </div>
                         </SelectItem>
                         <SelectItem value={CandidateStatus.POTENTIAL}>
                           <div className="flex items-center">
                             <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2" />
-                            Potential
+                            潜在
                           </div>
                         </SelectItem>
                         <SelectItem value={CandidateStatus.SELECTED}>
                           <div className="flex items-center">
                             <div className="w-3 h-3 bg-green-500 rounded-full mr-2" />
-                            Selected
+                            已选
                           </div>
                         </SelectItem>
                       </SelectContent>
@@ -244,24 +235,20 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
 
                       <AlertDialogContent>
                         <AlertDialogHeader>
-                          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-
+                          <AlertDialogTitle>确定要删除吗？</AlertDialogTitle>
                           <AlertDialogDescription>
-                            This action cannot be undone. This will permanently delete this
-                            response.
+                            此操作无法撤销，将永久删除此条回答。
                           </AlertDialogDescription>
                         </AlertDialogHeader>
-
                         <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
-
+                          <AlertDialogCancel>取消</AlertDialogCancel>
                           <AlertDialogAction
                             className="bg-indigo-600 hover:bg-indigo-800"
                             onClick={async () => {
                               await onDeleteResponseClick();
                             }}
                           >
-                            Continue
+                            确认删除
                           </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>
@@ -269,7 +256,7 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
                   </div>
                 </div>
                 <div className="flex flex-col mt-3">
-                  <p className="font-semibold">Interview Recording</p>
+                  <p className="font-semibold">面试录音</p>
                   <div className="flex flex-row gap-3 mt-2">
                     {call?.recording_url && <ReactAudioPlayer src={call?.recording_url} controls />}
                     <a
@@ -284,11 +271,10 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
                 </div>
               </div>
             </div>
-            {/* <div>{call.}</div> */}
           </div>
-          <div className="bg-slate-200 rounded-2xl min-h-[120px] p-4 px-5 my-3">
-            <p className="font-semibold my-2">General Summary</p>
 
+          <div className="bg-slate-200 rounded-2xl min-h-[120px] p-4 px-5 my-3">
+            <p className="font-semibold my-2">整体总结</p>
             <div className="grid grid-cols-3 gap-4 my-2 mt-4 ">
               {analytics?.overallScore !== undefined && (
                 <div className="flex flex-col gap-3 text-sm p-4 rounded-2xl bg-slate-50">
@@ -305,11 +291,11 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
                       showValueLabel={true}
                       formatOptions={{ signDisplay: "never" }}
                     />
-                    <p className="font-medium my-auto text-xl">Overall Hiring Score</p>
+                    <p className="font-medium my-auto text-xl">综合评分</p>
                   </div>
                   <div className="">
                     <div className="font-medium ">
-                      <span className="font-normal">Feedback: </span>
+                      <span className="font-normal">反馈: </span>
                       {analytics?.overallFeedback === undefined ? (
                         <Skeleton className="w-[200px] h-[20px]" />
                       ) : (
@@ -342,11 +328,11 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
                       }
                       formatOptions={{ signDisplay: "never" }}
                     />
-                    <p className="font-medium my-auto text-xl">Communication</p>
+                    <p className="font-medium my-auto text-xl">沟通能力</p>
                   </div>
                   <div className="">
                     <div className="font-medium ">
-                      <span className="font-normal">Feedback: </span>
+                      <span className="font-normal">反馈: </span>
                       {analytics?.communication.feedback === undefined ? (
                         <Skeleton className="w-[200px] h-[20px]" />
                       ) : (
@@ -358,7 +344,7 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
               )}
               <div className="flex flex-col gap-3 text-sm p-4 rounded-2xl bg-slate-50">
                 <div className="flex flex-row gap-2  align-middle">
-                  <p className="my-auto">User Sentiment: </p>
+                  <p className="my-auto">用户情绪: </p>
                   <p className="font-medium my-auto">
                     {call?.call_analysis?.user_sentiment === undefined ? (
                       <Skeleton className="w-[200px] h-[20px]" />
@@ -372,10 +358,10 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
                       call?.call_analysis?.user_sentiment === "Neutral"
                         ? "text-yellow-500"
                         : call?.call_analysis?.user_sentiment === "Negative"
-                          ? "text-red-500"
-                          : call?.call_analysis?.user_sentiment === "Positive"
-                            ? "text-green-500"
-                            : "text-transparent"
+                        ? "text-red-500"
+                        : call?.call_analysis?.user_sentiment === "Positive"
+                        ? "text-green-500"
+                        : "text-transparent"
                     } text-xl`}
                   >
                     ●
@@ -383,7 +369,7 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
                 </div>
                 <div className="">
                   <div className="font-medium  ">
-                    <span className="font-normal">Call Summary: </span>
+                    <span className="font-normal">通话总结: </span>
                     {call?.call_analysis?.call_summary === undefined ? (
                       <Skeleton className="w-[200px] h-[20px]" />
                     ) : (
@@ -395,9 +381,10 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
               </div>
             </div>
           </div>
+
           {analytics?.questionSummaries && analytics.questionSummaries.length > 0 && (
             <div className="bg-slate-200 rounded-2xl min-h-[120px] p-4 px-5 my-3">
-              <p className="font-semibold my-2 mb-4">Question Summary</p>
+              <p className="font-semibold my-2 mb-4">问题总结</p>
               <ScrollArea className="rounded-md h-72 text-sm mt-3 py-3 leading-6 overflow-y-scroll whitespace-pre-line px-2">
                 {analytics?.questionSummaries.map((qs, index) => (
                   <QuestionAnswerCard
@@ -410,12 +397,12 @@ function CallInfo({ call_id, onDeleteResponse, onCandidateStatusChange }: CallPr
               </ScrollArea>
             </div>
           )}
+
           <div className="bg-slate-200 rounded-2xl min-h-[150px] max-h-[500px] p-4 px-5 mb-[150px]">
-            <p className="font-semibold my-2 mb-4">Transcript</p>
+            <p className="font-semibold my-2 mb-4">面试记录</p>
             <ScrollArea className="rounded-2xl text-sm h-96  overflow-y-auto whitespace-pre-line px-2">
               <div
                 className="text-sm p-4 rounded-2xl leading-5 bg-slate-50"
-                // biome-ignore lint/security/noDangerouslySetInnerHtml: required for markdown rendering
                 dangerouslySetInnerHTML={{ __html: marked(transcript) }}
               />
             </ScrollArea>
