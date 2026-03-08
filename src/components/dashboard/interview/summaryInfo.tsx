@@ -67,13 +67,13 @@ function SummaryInfo({ responses, interview }: SummaryProps) {
   const prepareTableData = (responses: Response[]): TableData[] => {
     return responses.map((response) => ({
       call_id: response.call_id,
-      name: response.name || "Anonymous",
+      name: response.name || "匿名",
       overallScore: response.analytics?.overallScore || 0,
       communicationScore: response.analytics?.communication?.score || 0,
       callSummary:
         response.analytics?.softSkillSummary ||
         response.details?.call_analysis?.call_summary ||
-        "No summary available",
+        "暂无摘要",
     }));
   };
 
@@ -161,14 +161,14 @@ function SummaryInfo({ responses, interview }: SummaryProps) {
         <div className="bg-slate-200 rounded-2xl min-h-[120px] p-2 ">
           <div className="flex flex-row gap-2 justify-between items-center mx-2">
             <div className="flex flex-row gap-2 items-center">
-              <p className="font-semibold my-2">Overall Analysis</p>
+              <p className="font-semibold my-2">整体分析</p>
             </div>
             <p className="text-sm">
-              Interviewer used: <span className="font-medium">{interviewer?.name}</span>
+              使用的面试官：<span className="font-medium">{interviewer?.name}</span>
             </p>
           </div>
           <p className="my-3 ml-2 text-sm">
-            Interview Description: <span className="font-medium">{interview?.description}</span>
+            面试说明：<span className="font-medium">{interview?.description}</span>
           </p>
           <div className="flex flex-col gap-1 my-2 mt-4 mx-2 p-4 rounded-2xl bg-slate-50 shadow-md">
             <ScrollArea className="h-[250px]">
@@ -179,8 +179,8 @@ function SummaryInfo({ responses, interview }: SummaryProps) {
             <div className="flex flex-col">
               <div className="flex flex-col gap-1 my-2 mt-4 mx-2 p-3 rounded-2xl bg-slate-50 shadow-md max-w-[400px]">
                 <div className="flex flex-row items-center justify-center gap-1 font-semibold mb-1 text-[15px]">
-                  Average Duration
-                  <InfoTooltip content="Average time users took to complete an interview" />
+                  平均时长
+                  <InfoTooltip content="用户完成一次面试所花费的平均时间" />
                 </div>
                 <div className="flex items-center justify-center">
                   <p className="text-2xl font-semibold text-indigo-600 w-fit p-1 px-2 bg-indigo-100 rounded-md">
@@ -190,8 +190,8 @@ function SummaryInfo({ responses, interview }: SummaryProps) {
               </div>
               <div className="flex flex-col items-center justify-center gap-1 mx-2 p-3 rounded-2xl bg-slate-50 shadow-md max-w-[360px]">
                 <div className="flex flex-row gap-1 font-semibold mb-1 text-[15px] mx-auto text-center">
-                  Interview Completion Rate
-                  <InfoTooltip content="Percentage of interviews completed successfully" />
+                  面试完成率
+                  <InfoTooltip content="成功完成的面试所占百分比" />
                 </div>
                 <p className="w-fit text-2xl font-semibold text-indigo-600  p-1 px-2 bg-indigo-100 rounded-md">
                   {Math.round((completedInterviews / responses.length) * 10000) / 100}%
@@ -201,8 +201,8 @@ function SummaryInfo({ responses, interview }: SummaryProps) {
             <div className="flex flex-col gap-1 my-2 mt-4 mx-2 p-4 rounded-2xl bg-slate-50 shadow-md max-w-[360px]">
               <div className="flex flex-row gap-2 text-[15px] font-bold mb-3 mx-auto">
                 <SmileIcon />
-                Candidate Sentiment
-                <InfoTooltip content="Distribution of user sentiments during interviews" />
+                候选人情绪
+                <InfoTooltip content="面试过程中用户情绪分布情况" />
               </div>
               <PieChart
                 sx={{
@@ -216,19 +216,19 @@ function SummaryInfo({ responses, interview }: SummaryProps) {
                       {
                         id: 0,
                         value: sentimentCount.positive,
-                        label: `Positive (${sentimentCount.positive})`,
+                        label: `积极 (${sentimentCount.positive})`,
                         color: "#22c55e",
                       },
                       {
                         id: 1,
                         value: sentimentCount.neutral,
-                        label: `Neutral (${sentimentCount.neutral})`,
+                        label: `中性 (${sentimentCount.neutral})`,
                         color: "#eab308",
                       },
                       {
                         id: 2,
                         value: sentimentCount.negative,
-                        label: `Negative (${sentimentCount.negative})`,
+                        label: `消极 (${sentimentCount.negative})`,
                         color: "#eb4444",
                       },
                     ],
@@ -247,10 +247,10 @@ function SummaryInfo({ responses, interview }: SummaryProps) {
             <div className="flex flex-col gap-1 my-2 mt-4 mx-2 p-4 rounded-2xl bg-slate-50 shadow-md">
               <div className="flex flex-row gap-2 text-[15px] font-bold mx-auto mb-1">
                 <UserCircleIcon />
-                Candidate Status
-                <InfoTooltip content="Breakdown of the candidate selection status" />
+                候选人状态
+                <InfoTooltip content="候选人筛选状态分布情况" />
               </div>
-              <div className="text-sm text-center mb-1">Total Responses: {totalResponses}</div>
+              <div className="text-sm text-center mb-1">总回答数：{totalResponses}</div>
               <PieChart
                 sx={{
                   "& .MuiChartsLegend-series text": {
@@ -263,25 +263,25 @@ function SummaryInfo({ responses, interview }: SummaryProps) {
                       {
                         id: 0,
                         value: candidateStatusCount[CandidateStatus.SELECTED],
-                        label: `Selected (${candidateStatusCount[CandidateStatus.SELECTED]})`,
+                        label: `已选中 (${candidateStatusCount[CandidateStatus.SELECTED]})`,
                         color: "#22c55e",
                       },
                       {
                         id: 1,
                         value: candidateStatusCount[CandidateStatus.POTENTIAL],
-                        label: `Potential (${candidateStatusCount[CandidateStatus.POTENTIAL]})`,
+                        label: `潜力候选 (${candidateStatusCount[CandidateStatus.POTENTIAL]})`,
                         color: "#eab308",
                       },
                       {
                         id: 2,
                         value: candidateStatusCount[CandidateStatus.NOT_SELECTED],
-                        label: `Not Selected (${candidateStatusCount[CandidateStatus.NOT_SELECTED]})`,
+                        label: `未选中 (${candidateStatusCount[CandidateStatus.NOT_SELECTED]})`,
                         color: "#eb4444",
                       },
                       {
                         id: 3,
                         value: candidateStatusCount[CandidateStatus.NO_STATUS],
-                        label: `No Status (${candidateStatusCount[CandidateStatus.NO_STATUS]})`,
+                        label: `无状态 (${candidateStatusCount[CandidateStatus.NO_STATUS]})`,
                         color: "#9ca3af",
                       },
                     ],
@@ -314,7 +314,7 @@ function SummaryInfo({ responses, interview }: SummaryProps) {
         <div className="w-[85%] h-[60%] flex flex-col items-center justify-center">
           <div className="flex flex-col items-center">
             <Image src="/no-responses.png" alt="logo" width={270} height={270} />
-            <p className="text-center text-sm mt-0">Please share with your intended respondents</p>
+            <p className="text-center text-sm mt-0">请分享给你的目标受访者</p>
           </div>
         </div>
       )}
