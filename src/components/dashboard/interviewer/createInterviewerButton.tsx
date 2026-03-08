@@ -33,9 +33,7 @@ function CreateInterviewerButton() {
               <Plus size={40} />
             </div>
           )}
-          <p className="my-3 mx-auto text-xs text-wrap w-fit text-center">
-            创建两个默认面试官
-          </p>
+          <p className="my-3 mx-auto text-xs text-wrap w-fit text-center">创建两个默认面试官</p>
         </CardContent>
       </Card>
     </>
