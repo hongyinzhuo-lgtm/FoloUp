@@ -1,62 +1,73 @@
 export const SYSTEM_PROMPT =
-  "You are an expert in analyzing interview transcripts. You must only use the main questions provided and not generate or infer additional questions.";
+  "你是一名专业的面试转录分析专家。你只能使用提供的主面试问题进行分析，不得生成、补充或推断任何额外问题。除非用户明确要求，否则所有输出内容必须使用简体中文。";
 
 export const getInterviewAnalyticsPrompt = (
   interviewTranscript: string,
   mainInterviewQuestions: string,
-) => `Analyse the following interview transcript and provide structured feedback:
+) => `请分析以下面试转录内容，并提供结构化反馈：
 
 ###
-Transcript: ${interviewTranscript}
+面试转录：${interviewTranscript}
 
-Main Interview Questions:
+主面试问题：
 ${mainInterviewQuestions}
 
+请基于这份转录内容和提供的主面试问题，按 JSON 格式生成以下分析结果：
 
-Based on this transcript and the provided main interview questions, generate the following analytics in JSON format:
-1. Overall Score (0-100) and Overall Feedback (60 words) - take into account the following factors:
-   - Communication Skills: Evaluate the use of language, grammar, and vocabulary. Assess if the interviewee communicated effectively and clearly.
-   - Time Taken to Answer: Consider if the interviewee answered promptly or took too long. Note if they were concise or tended to ramble.
-   - Confidence: Assess the interviewee's confidence level. Were they assertive and self-assured, or did they seem hesitant and unsure?
-   - Clarity: Evaluate the clarity of their answers. Were their responses well-structured and easy to understand?
-   - Attitude: Consider the interviewee's attitude towards the interview and questions. Were they positive, respectful, and engaged?
-   - Relevance of Answers: Determine if the interviewee's responses are relevant to the questions asked. Assess if they stayed on topic or veered off track.
-   - Depth of Knowledge: Evaluate the interviewee's depth of understanding and knowledge in the subject matter. Look for detailed and insightful answers.
-   - Problem-Solving Ability: Consider how the interviewee approaches problem-solving questions. Assess their logical reasoning and analytical skills.
-   - Examples and Evidence: Note if the interviewee provides concrete examples or evidence to support their answers. This can indicate experience and credibility.
-   - Listening Skills: Look for signs that the interviewee is actively listening and responding appropriately to follow-up questions.
-   - Consistency: Evaluate if the interviewee's answers are consistent throughout the interview or if they contradict themselves.
-   - Adaptability: Assess how well the interviewee adapts to different types of questions, including unexpected or challenging ones.
+1. 总体评分（0-100）和总体反馈（60字以内），综合考虑以下因素：
+   - 沟通能力：评估语言表达、语法、词汇使用，以及是否表达清晰有效。
+   - 回答时效：评估候选人是否快速作答，是否简洁，是否存在冗长跑题。
+   - 自信程度：评估候选人是否自信坚定，还是犹豫不确定。
+   - 表达清晰度：评估回答是否结构清楚、容易理解。
+   - 态度：评估候选人面对面试和问题时是否积极、尊重、投入。
+   - 回答相关性：评估回答是否紧扣问题，是否偏题。
+   - 知识深度：评估候选人在相关主题上的理解深度和专业程度。
+   - 问题解决能力：评估候选人面对问题时的逻辑推理和分析能力。
+   - 举例与证据：评估候选人是否提供具体案例或证据支撑观点。
+   - 倾听能力：判断候选人是否认真理解问题并恰当回应追问。
+   - 一致性：评估候选人在整场面试中的回答是否前后一致，是否自相矛盾。
+   - 适应能力：评估候选人面对不同类型问题，尤其是意外或有挑战性问题时的应对表现。
 
-2. Communication Skills: Score (0-10) and Feedback (60 words). Rating system and guidleines for communication skills is as follwing.
-    - 10: Fully operational command, use of English is appropriate, accurate, fluent, shows complete understanding.
-    - 09: Fully operational command with occasional inaccuracies and inappropriate usage. May misunderstand unfamiliar situations but handles complex arguments well.
-    - 08: Operational command with occasional inaccuracies, inappropriate usage, and misunderstandings. Handles complex language and detailed reasoning well.
-    - 07: Effective command despite some inaccuracies, inappropriate usage, and misunderstandings. Can use and understand reasonably complex language, especially in familiar situations.
-    - 06: Partial command, copes with overall meaning, frequent mistakes. Handles basic communication in their field.
-    - 05: Basic competence limited to familiar situations with frequent problems in understanding and expression.
-    - 04: Understands only general meaning in very familiar situations, with frequent communication breakdowns.
-    - 03: Has great difficulty understanding spoken English.
-    - 02: Has no ability to use the language except a few isolated words.
-    - 01: Did not answer the questions.
-3. Summary for each main interview question: ${mainInterviewQuestions}
-   - Use ONLY the main questions provided, it should output all the questions with the numbers even if it's not found in the transcript.
-   - Follow the below rules when outputing the question and summary
-      - If a main interview question isn't found in the transcript, then output the main question and give the summary as "Not Asked"
-      - If a main interview question is found in the transcript but an answer couldn't be found, then output the main question and give the summary as "Not Answered"
-      - If a main interview question is found in the transcript and an answer can also be found, then,
-          - For each main question (q), provide a summary that includes:
-            a) The candidate's response to the main question
-            b) Any follow-up questions that were asked related to this main question and their answers
-          - The summary should be a cohesive paragraph encompassing all related information for each main question
-4. Create a 10 to 15 words summary regarding the soft skills considering factors such as confidence, leadership, adaptability, critical thinking and decision making.
-Ensure the output is in valid JSON format with the following structure:
+2. 沟通能力分析：给出分数（0-10）和反馈（60字以内）。沟通能力评分标准如下：
+   - 10：完全熟练掌握，语言使用恰当、准确、流畅，展现完全理解。
+   - 09：基本完全掌握，偶有不准确或不恰当表达。面对陌生情境可能有误解，但能较好处理复杂表达。
+   - 08：具备良好掌握能力，偶有不准确、不恰当表达和误解，能较好处理复杂语言和细致推理。
+   - 07：总体表达有效，虽存在一些不准确、不恰当表达和误解，但在熟悉场景下能较好使用较复杂语言。
+   - 06：部分掌握，能够理解整体意思，但错误较多。在所属领域内可进行基本沟通。
+   - 05：仅在熟悉场景中具备基本沟通能力，理解和表达问题较多。
+   - 04：仅能理解非常熟悉场景中的大意，沟通频繁中断。
+   - 03：在理解口语方面存在很大困难。
+   - 02：除少量孤立词语外，几乎无法使用该语言。
+   - 01：未回答问题。
+
+3. 针对每个主面试问题生成总结：${mainInterviewQuestions}
+   - 只能使用提供的主面试问题，必须把所有主问题按原样输出，即使在转录中没有出现也要输出。
+   - 输出问题和总结时，严格遵循以下规则：
+      - 如果某个主问题在转录中没有出现，则输出该主问题，并将 summary 写为 "未提问"
+      - 如果某个主问题在转录中出现了，但没有找到回答，则输出该主问题，并将 summary 写为 "未回答"
+      - 如果某个主问题在转录中出现了，且也找到了回答，则：
+          - 针对每个主问题，summary 需要包含：
+            a) 候选人对该主问题的回答总结
+            b) 与该主问题相关的追问及回答内容总结
+          - summary 必须写成一段连贯的中文总结，覆盖该主问题相关的全部信息
+   - 不得新增、改写或推断任何不在主面试问题列表中的新问题。
+
+4. 生成一条 10 到 15 个汉字以内的软技能总结，综合考虑自信、领导力、适应能力、批判性思维和决策能力。
+
+请严格遵循以下输出要求：
+- 所有输出内容必须使用简体中文。
+- questionSummaries 中的 "question" 字段请保留主问题原文；如果主问题本身是英文，则可保留英文原文，不要擅自翻译或改写。
+- 除 question 字段保留原问题原文外，其他所有说明性字段必须使用简体中文。
+- 只输出合法 JSON，不要输出 markdown，不要输出代码块，不要输出额外解释。
+- 只允许使用提供的主面试问题，不得生成、补充或推断额外问题，包括追问标题或新的问题名称。
+
+请确保输出为以下 JSON 结构：
 {
   "overallScore": number,
   "overallFeedback": string,
   "communication": { "score": number, "feedback": string },
   "questionSummaries": [{ "question": string, "summary": string }],
-  "softSkillSummary: string
+  "softSkillSummary": string
 }
 
-IMPORTANT: Only use the main questions provided. Do not generate or infer additional questions such as follow-up questions.`;
+重要：只能使用提供的主面试问题。不要生成、补充或推断任何额外问题，例如新的追问问题标题。`;
