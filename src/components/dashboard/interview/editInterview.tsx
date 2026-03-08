@@ -174,9 +174,7 @@ function EditInterview({ interview }: EditInterviewProps) {
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle>你确定吗？</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    此操作无法撤销。该面试将被永久删除。
-                  </AlertDialogDescription>
+                  <AlertDialogDescription>此操作无法撤销。该面试将被永久删除。</AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>取消</AlertDialogCancel>
@@ -253,9 +251,7 @@ function EditInterview({ interview }: EditInterviewProps) {
         </div>
         <div className="flex-col mt-2 ml-2 w-full">
           <div className="flex items-center cursor-pointer">
-            <span className="text-sm font-medium">
-              你希望受访者的回答保持匿名吗？
-            </span>
+            <span className="text-sm font-medium">你希望受访者的回答保持匿名吗？</span>
             <Switch
               checked={isAnonymous}
               className={`ml-4 mt-1 border-2 border-gray-300 ${
@@ -267,9 +263,7 @@ function EditInterview({ interview }: EditInterviewProps) {
           <span
             style={{ fontSize: "0.7rem", lineHeight: "0.66rem" }}
             className="font-light text-xs italic w-full text-left block"
-          >
-            说明：如果不匿名，将会收集受访者的邮箱和姓名。
-          </span>
+          >说明：如果不匿名，将会收集受访者的邮箱和姓名</span>
         </div>
         <div className="flex flex-row justify-between w-[75%] gap-3 ml-2">
           <div className="flex flex-row justify-center items-center mt-5 ">
