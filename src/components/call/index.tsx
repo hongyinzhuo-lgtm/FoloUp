@@ -82,15 +82,15 @@ function Call({ interview }: InterviewProps) {
       });
 
       if (result) {
-        toast.success("Thank you for your feedback!");
+        toast.success("感谢您的反馈！");
         setIsFeedbackSubmitted(true);
         setIsDialogOpen(false);
       } else {
-        toast.error("Failed to submit feedback. Please try again.");
+        toast.error("提交反馈失败，请重试。");
       }
     } catch (error) {
-      console.error("Error submitting feedback:", error);
-      toast.error("An error occurred. Please try again later.");
+      console.error("提交反馈时出错:", error);
+      toast.error("发生错误，请稍后再试。");
     }
   };
 
@@ -106,7 +106,6 @@ function Call({ interview }: InterviewProps) {
   useEffect(() => {
     let intervalId: any;
     if (isCalling) {
-      // setting time from 0 to 1 every 10 milisecond using javascript setInterval method
       intervalId = setInterval(() => setTime(time + 1), 10);
     }
     setCurrentTimeDuration(String(Math.floor(time / 100)));
@@ -142,7 +141,6 @@ function Call({ interview }: InterviewProps) {
     });
 
     webClient.on("agent_stop_talking", () => {
-      // Optional: Add any logic when agent stops talking
       setActiveTurn("user");
     });
 
@@ -165,11 +163,9 @@ function Call({ interview }: InterviewProps) {
         setLastInterviewerResponse(roleContents.agent);
         setLastUserResponse(roleContents.user);
       }
-      //TODO: highlight the newly uttered word in the UI
     });
 
     return () => {
-      // Clean up event listeners
       webClient.removeAllListeners();
     };
   }, []);
@@ -219,7 +215,7 @@ function Call({ interview }: InterviewProps) {
 
         setCallId(registerCallResponse?.data?.registerCallResponse?.call_id);
 
-        const response = await createResponse({
+        await createResponse({
           interview_id: interview.id,
           call_id: registerCallResponse.data.registerCallResponse.call_id,
           email: email,
@@ -267,11 +263,11 @@ function Call({ interview }: InterviewProps) {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       {isStarted && <TabSwitchWarning />}
       <div className="bg-white rounded-md md:w-[80%] w-[90%]">
-        <Card className="h-[88vh] rounded-lg border-2 border-b-4 border-r-4 border-black text-xl font-bold transition-all  md:block dark:border-white ">
+        <Card className="h-[88vh] rounded-lg border-2 border-b-4 border-r-4 border-black text-xl font-bold transition-all md:block dark:border-white">
           <div>
-            <div className="m-4 h-[15px] rounded-lg border-[1px]  border-black">
+            <div className="m-4 h-[15px] rounded-lg border-[1px] border-black">
               <div
-                className=" bg-indigo-600 h-[15px] rounded-lg"
+                className="bg-indigo-600 h-[15px] rounded-lg"
                 style={{
                   width: isEnded
                     ? "100%"
@@ -290,21 +286,22 @@ function Call({ interview }: InterviewProps) {
               {!isEnded && (
                 <div className="flex mt-2 flex-row">
                   <AlarmClockIcon
-                    className="text-indigo-600 h-[1rem] w-[1rem] rotate-0 scale-100  dark:-rotate-90 dark:scale-0 mr-2 font-bold"
+                    className="text-indigo-600 h-[1rem] w-[1rem] rotate-0 scale-100 dark:-rotate-90 dark:scale-0 mr-2 font-bold"
                     style={{ color: interview.theme_color }}
                   />
                   <div className="text-sm font-normal">
-                    Expected duration:{" "}
+                    预计时长：
                     <span className="font-bold" style={{ color: interview.theme_color }}>
-                      {interviewTimeDuration} mins{" "}
+                      {interviewTimeDuration} 分钟
                     </span>
-                    or less
+                    以内
                   </div>
                 </div>
               )}
             </CardHeader>
+
             {!isStarted && !isEnded && !isOldUser && (
-              <div className="w-fit min-w-[400px] max-w-[400px] mx-auto mt-2  border border-indigo-200 rounded-md p-2 m-2 bg-slate-50">
+              <div className="w-fit min-w-[400px] max-w-[400px] mx-auto mt-2 border border-indigo-200 rounded-md p-2 m-2 bg-slate-50">
                 <div>
                   {interview?.logo_url && (
                     <div className="p-1 flex justify-center">
@@ -320,9 +317,9 @@ function Call({ interview }: InterviewProps) {
                   <div className="p-2 font-normal text-sm mb-4 whitespace-pre-line">
                     {interview?.description}
                     <p className="font-bold text-sm">
-                      {"\n"}Ensure your volume is up and grant microphone access when prompted.
-                      Additionally, please make sure you are in a quiet environment.
-                      {"\n\n"}Note: Tab switching will be recorded.
+                      {"\n"}请确保音量已打开，并在提示时允许麦克风权限。
+                      另外，请尽量处于安静环境中。
+                      {"\n\n"}注意：系统会记录切换标签页的行为。
                     </p>
                   </div>
                   {!interview?.is_anonymous && (
@@ -331,7 +328,7 @@ function Call({ interview }: InterviewProps) {
                         <input
                           value={email}
                           className="h-fit mx-auto py-2 border-2 rounded-md w-[75%] self-center px-2 border-gray-400 text-sm font-normal"
-                          placeholder="Enter your email address"
+                          placeholder="请输入您的邮箱地址"
                           onChange={(e) => setEmail(e.target.value)}
                         />
                       </div>
@@ -339,7 +336,7 @@ function Call({ interview }: InterviewProps) {
                         <input
                           value={name}
                           className="h-fit mb-4 mx-auto py-2 border-2 rounded-md w-[75%] self-center px-2 border-gray-400 text-sm font-normal"
-                          placeholder="Enter your first name"
+                          placeholder="请输入您的名字拼音"
                           onChange={(e) => setName(e.target.value)}
                         />
                       </div>
@@ -356,7 +353,7 @@ function Call({ interview }: InterviewProps) {
                     disabled={Loading || (!interview?.is_anonymous && (!isValidEmail || !name))}
                     onClick={startConversation}
                   >
-                    {!Loading ? "Start Interview" : <MiniLoader />}
+                    {!Loading ? "开始面试" : <MiniLoader />}
                   </Button>
                   <AlertDialog>
                     <AlertDialogTrigger>
@@ -365,22 +362,22 @@ function Call({ interview }: InterviewProps) {
                         style={{ borderColor: interview.theme_color }}
                         disabled={Loading}
                       >
-                        Exit
+                        退出
                       </Button>
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                       <AlertDialogHeader>
-                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                        <AlertDialogTitle>确定要退出吗？</AlertDialogTitle>
                       </AlertDialogHeader>
                       <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogCancel>取消</AlertDialogCancel>
                         <AlertDialogAction
                           className="bg-indigo-600 hover:bg-indigo-800"
                           onClick={async () => {
                             await onEndCallClick();
                           }}
                         >
-                          Continue
+                          确认
                         </AlertDialogAction>
                       </AlertDialogFooter>
                     </AlertDialogContent>
@@ -388,15 +385,12 @@ function Call({ interview }: InterviewProps) {
                 </div>
               </div>
             )}
+
             {isStarted && !isEnded && !isOldUser && (
               <div className="flex flex-row p-2 grow">
                 <div className="border-x-2 border-grey w-[50%] my-auto min-h-[70%]">
                   <div className="flex flex-col justify-evenly">
-                    <div
-                      className={
-                        "text-[22px] w-[80%] md:text-[26px] mt-4 min-h-[250px] mx-auto px-6"
-                      }
-                    >
+                    <div className="text-[22px] w-[80%] md:text-[26px] mt-4 min-h-[250px] mx-auto px-6">
                       {lastInterviewerResponse}
                     </div>
                     <div className="flex flex-col mx-auto justify-center items-center align-middle">
@@ -411,7 +405,7 @@ function Call({ interview }: InterviewProps) {
                             : ""
                         }`}
                       />
-                      <div className="font-semibold">Interviewer</div>
+                      <div className="font-semibold">面试官</div>
                     </div>
                   </div>
                 </div>
@@ -419,9 +413,7 @@ function Call({ interview }: InterviewProps) {
                 <div className="flex flex-col justify-evenly w-[50%]">
                   <div
                     ref={lastUserResponseRef}
-                    className={
-                      "text-[22px] w-[80%] md:text-[26px] mt-4 mx-auto h-[250px] px-6 overflow-y-auto"
-                    }
+                    className="text-[22px] w-[80%] md:text-[26px] mt-4 mx-auto h-[250px] px-6 overflow-y-auto"
                   >
                     {lastUserResponse}
                   </div>
@@ -437,39 +429,40 @@ function Call({ interview }: InterviewProps) {
                           : ""
                       }`}
                     />
-                    <div className="font-semibold">You</div>
+                    <div className="font-semibold">你</div>
                   </div>
                 </div>
               </div>
             )}
+
             {isStarted && !isEnded && !isOldUser && (
               <div className="items-center p-2">
                 <AlertDialog>
                   <AlertDialogTrigger className="w-full">
                     <Button
-                      className=" bg-white text-black border  border-indigo-600 h-10 mx-auto flex flex-row justify-center mb-8"
+                      className="bg-white text-black border border-indigo-600 h-10 mx-auto flex flex-row justify-center mb-8"
                       disabled={Loading}
                     >
-                      End Interview{" "}
-                      <XCircleIcon className="h-[1.5rem] ml-2 w-[1.5rem] rotate-0 scale-100  dark:-rotate-90 dark:scale-0 text-red" />
+                      结束面试
+                      <XCircleIcon className="h-[1.5rem] ml-2 w-[1.5rem] rotate-0 scale-100 dark:-rotate-90 dark:scale-0 text-red" />
                     </Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                      <AlertDialogTitle>确定要结束吗？</AlertDialogTitle>
                       <AlertDialogDescription>
-                        This action cannot be undone. This action will end the call.
+                        此操作无法撤销，执行后将结束本次通话。
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogCancel>取消</AlertDialogCancel>
                       <AlertDialogAction
                         className="bg-indigo-600 hover:bg-indigo-800"
                         onClick={async () => {
                           await onEndCallClick();
                         }}
                       >
-                        Continue
+                        确认
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
@@ -478,18 +471,18 @@ function Call({ interview }: InterviewProps) {
             )}
 
             {isEnded && !isOldUser && (
-              <div className="w-fit min-w-[400px] max-w-[400px] mx-auto mt-2  border border-indigo-200 rounded-md p-2 m-2 bg-slate-50  absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+              <div className="w-fit min-w-[400px] max-w-[400px] mx-auto mt-2 border border-indigo-200 rounded-md p-2 m-2 bg-slate-50 absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                 <div>
                   <div className="p-2 font-normal text-base mb-4 whitespace-pre-line">
-                    <CheckCircleIcon className="h-[2rem] w-[2rem] mx-auto my-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 text-indigo-500 " />
+                    <CheckCircleIcon className="h-[2rem] w-[2rem] mx-auto my-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 text-indigo-500" />
                     <p className="text-lg font-semibold text-center">
                       {isStarted
-                        ? "Thank you for taking the time to participate in this interview"
-                        : "Thank you very much for considering."}
+                        ? "感谢您抽出时间参加本次面试"
+                        : "非常感谢您的考虑。"}
                     </p>
                     <p className="text-center">
                       {"\n"}
-                      You can close this tab now.
+                      现在您可以关闭此页面。
                     </p>
                   </div>
 
@@ -500,7 +493,7 @@ function Call({ interview }: InterviewProps) {
                           className="bg-indigo-600 text-white h-10 mt-4 mb-4"
                           onClick={() => setIsDialogOpen(true)}
                         >
-                          Provide Feedback
+                          提交反馈
                         </Button>
                       </AlertDialogTrigger>
                       <AlertDialogContent>
@@ -511,18 +504,18 @@ function Call({ interview }: InterviewProps) {
                 </div>
               </div>
             )}
+
             {isOldUser && (
-              <div className="w-fit min-w-[400px] max-w-[400px] mx-auto mt-2  border border-indigo-200 rounded-md p-2 m-2 bg-slate-50  absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+              <div className="w-fit min-w-[400px] max-w-[400px] mx-auto mt-2 border border-indigo-200 rounded-md p-2 m-2 bg-slate-50 absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                 <div>
                   <div className="p-2 font-normal text-base mb-4 whitespace-pre-line">
-                    <CheckCircleIcon className="h-[2rem] w-[2rem] mx-auto my-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 text-indigo-500 " />
+                    <CheckCircleIcon className="h-[2rem] w-[2rem] mx-auto my-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 text-indigo-500" />
                     <p className="text-lg font-semibold text-center">
-                      You have already responded in this interview or you are not eligible to
-                      respond. Thank you!
+                      您已经参与过这场面试，或当前不符合参与资格。感谢您的关注！
                     </p>
                     <p className="text-center">
                       {"\n"}
-                      You can close this tab now.
+                      现在您可以关闭此页面。
                     </p>
                   </div>
                 </div>
@@ -530,19 +523,20 @@ function Call({ interview }: InterviewProps) {
             )}
           </div>
         </Card>
+
         <a
           className="flex flex-row justify-center align-middle mt-3"
           href="https://folo-up.co/"
           target="_blank"
           rel="noreferrer"
         >
-          <div className="text-center text-md font-semibold mr-2  ">
-            Powered by{" "}
+          <div className="text-center text-md font-semibold mr-2">
+            技术支持：
             <span className="font-bold">
               Folo<span className="text-indigo-600">Up</span>
             </span>
           </div>
-          <ArrowUpRightSquareIcon className="h-[1.5rem] w-[1.5rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 text-indigo-500 " />
+          <ArrowUpRightSquareIcon className="h-[1.5rem] w-[1.5rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 text-indigo-500" />
         </a>
       </div>
     </div>
