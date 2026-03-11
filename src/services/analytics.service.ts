@@ -28,16 +28,17 @@ export const generateInterviewAnalytics = async (payload: {
       .map((q: Question, index: number) => `${index + 1}. ${q.question}`)
       .join("\n");
 
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
+    const cerebras = new OpenAI({
+      apiKey: process.env.CEREBRAS_API_KEY,
+      baseURL: "https://api.cerebras.ai/v1",
       maxRetries: 5,
       dangerouslyAllowBrowser: true,
     });
 
     const prompt = getInterviewAnalyticsPrompt(interviewTranscript, mainInterviewQuestions);
 
-    const baseCompletion = await openai.chat.completions.create({
-      model: "gpt-4o",
+    const completion = await cerebras.chat.completions.create({
+      model: process.env.CEREBRAS_MODEL as string,
       messages: [
         {
           role: "system",
@@ -51,15 +52,15 @@ export const generateInterviewAnalytics = async (payload: {
       response_format: { type: "json_object" },
     });
 
-    const basePromptOutput = baseCompletion.choices[0] || {};
-    const content = basePromptOutput.message?.content || "";
+    const output = completion.choices[0] || {};
+    const content = output.message?.content || "";
     const analyticsResponse = JSON.parse(content);
 
     analyticsResponse.mainInterviewQuestions = questions.map((q: Question) => q.question);
 
     return { analytics: analyticsResponse, status: 200 };
   } catch (error) {
-    console.error("Error in OpenAI request:", error);
+    console.error("Error in Cerebras request:", error);
 
     return { error: "internal server error", status: 500 };
   }
