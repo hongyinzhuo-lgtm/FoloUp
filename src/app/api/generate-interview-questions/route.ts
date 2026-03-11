@@ -1,4 +1,6 @@
-import { logger } from "@/lib/logger";
+"use server";
+
+import { logger } from "@/lib/logger"; 
 import { SYSTEM_PROMPT, generateQuestionsPrompt } from "@/lib/prompts/generate-questions";
 import { NextResponse } from "next/server";
 import { OpenAI } from "openai";
@@ -9,15 +11,16 @@ export async function POST(req: Request) {
   logger.info("generate-interview-questions request received");
   const body = await req.json();
 
-  const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+  const cerebras = new OpenAI({
+    apiKey: process.env.CEREBRAS_API_KEY,
+    baseURL: "https://api.cerebras.ai/v1",
     maxRetries: 5,
     dangerouslyAllowBrowser: true,
   });
 
   try {
-    const baseCompletion = await openai.chat.completions.create({
-      model: "gpt-4o",
+    const completion = await cerebras.chat.completions.create({
+      model: "gpt-oss-120b",
       messages: [
         {
           role: "system",
@@ -31,8 +34,8 @@ export async function POST(req: Request) {
       response_format: { type: "json_object" },
     });
 
-    const basePromptOutput = baseCompletion.choices[0] || {};
-    const content = basePromptOutput.message?.content;
+    const output = completion.choices[0] || {};
+    const content = output.message?.content;
 
     logger.info("Interview questions generated successfully");
 
@@ -43,7 +46,7 @@ export async function POST(req: Request) {
       { status: 200 },
     );
   } catch (error) {
-    logger.error("Error generating interview questions");
+    logger.error("Error generating interview questions", error);
 
     return NextResponse.json({ error: "internal server error" }, { status: 500 });
   }
