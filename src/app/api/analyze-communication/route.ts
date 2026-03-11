@@ -1,3 +1,5 @@
+"use server";
+
 import { logger } from "@/lib/logger";
 import {
   SYSTEM_PROMPT,
@@ -17,14 +19,15 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Transcript is required" }, { status: 400 });
     }
 
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
+    const cerebras = new OpenAI({
+      apiKey: process.env.CEREBRAS_API_KEY,
+      baseURL: "https://api.cerebras.ai/v1",
       maxRetries: 5,
       dangerouslyAllowBrowser: true,
     });
 
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o",
+    const completion = await cerebras.chat.completions.create({
+      model: "gpt-oss-120b",
       messages: [
         {
           role: "system",
@@ -44,7 +47,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ analysis: JSON.parse(analysis || "{}") }, { status: 200 });
   } catch (error) {
-    logger.error("Error analyzing communication skills");
+    logger.error("Error analyzing communication skills", error);
 
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
